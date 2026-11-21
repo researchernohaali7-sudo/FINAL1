@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Academic and Technology Portfolio of NOHA ALI HADI ALI — Computer & Information Technology Student." />
+  <title>NOHA ALI HADI ALI — Academic &amp; Technology Portfolio</title>
+
+  <!-- Editorial Typography: Plus Jakarta Sans, Inter, and Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       01. DESIGN TOKENS & ARCHITECTURAL VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-primary: #0B1220;
+      --bg-secondary: #111C2E;
+      --bg-elevated: #152238;
+      --accent-primary: #39D5E6;
+      --accent-secondary: #8B7CFF;
+      --text-main: #F5F7FA;
+      --text-secondary: #A8B3C5;
+      --text-muted: #7C899E;
+      --border-subtle: rgba(255, 255, 255, 0.10);
+      --border-strong: rgba(255, 255, 255, 0.18);
+      --accent-primary-dim: rgba(57, 213, 230, 0.10);
+      --accent-secondary-dim: rgba(139, 124, 255, 0.12);
+
+      --font-display: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono-label: 'Manrope', 'Inter', sans-serif;
+
+      --container-max: 1160px;
+      --header-height: 76px;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ==========================================================================
+       02. RESET & BASE TYPOGRAPHY
+       ========================================================================== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-padding-top: calc(var(--header-height) + 24px);
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.65;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Subtle architectural hairline grid backdrop */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse 85% 70% at 50% 25%, #000 35%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 25%, #000 35%, transparent 100%);
+    }
+
+    ::selection {
+      background-color: rgba(57, 213, 230, 0.25);
+      color: var(--text-main);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      background: none;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* Skip Link for Keyboard & Screen Reader Accessibility */
+    .skip-link {
+      position: fixed;
+      top: -100px;
+      left: 16px;
+      z-index: 1000;
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    /* ==========================================================================
+       03. LAYOUT CONTAINERS & EDITORIAL GRID
+       ========================================================================== */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 4vw, 2.75rem);
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      padding-block: clamp(4.5rem, 8.5vw, 7rem);
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(200px, 280px) minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: start;
+    }
+
+    .section-meta {
+      position: sticky;
+      top: calc(var(--header-height) + 28px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .section-index {
+      font-family: var(--font-mono-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-index::before {
+      content: "";
+      display: inline-block;
+      width: 18px;
+      height: 1px;
+      background-color: var(--accent-primary);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 2.6vw, 2.15rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       04. HEADER & ARCHITECTURAL NAVIGATION
+       ========================================================================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      z-index: 100;
+      background-color: rgba(11, 18, 32, 0.86);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .header-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-display);
+      font-size: 0.925rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .brand-monogram {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-secondary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--accent-primary);
+      transition: border-color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .brand-mark:hover .brand-monogram {
+      border-color: var(--accent-primary);
+      background-color: var(--accent-primary-dim);
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 0.5rem 0.78rem;
+      font-family: var(--font-mono-label);
+      font-size: 0.835rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      transition: color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-main);
+      background-color: rgba(255, 255, 255, 0.04);
+    }
+
+    .nav-link.active {
+      color: var(--accent-primary);
+      background-color: var(--accent-primary-dim);
+    }
+
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 1.5px;
+      background-color: var(--accent-primary);
+      border-radius: 2px;
+    }
+
+    /* Mobile Navigation Toggle */
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-secondary);
+      color: var(--text-main);
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .menu-toggle:hover {
+      border-color: var(--accent-primary);
+    }
+
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-strong);
+      padding: 1.25rem clamp(1.25rem, 4vw, 2.75rem) 1.75rem;
+      z-index: 99;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+    }
+
+    .mobile-drawer.open {
+      display: block;
+    }
+
+    .mobile-nav-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 0.95rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-primary);
+      font-family: var(--font-mono-label);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link.active {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    /* ==========================================================================
+       05. SECTION 01 — HERO / INTRODUCTION
+       ========================================================================== */
+    .hero-section {
+      min-height: calc(100vh - 20px);
+      padding-top: calc(var(--header-height) + clamp(3.5rem, 7vw, 6rem));
+      padding-bottom: clamp(4rem, 7vw, 6rem);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-canvas-wrap {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.85;
+    }
+
+    #hero-network-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.42rem 0.9rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      background-color: rgba(17, 28, 46, 0.85);
+      font-family: var(--font-mono-label);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--accent-primary);
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent-primary);
+      box-shadow: 0 0 10px var(--accent-primary);
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.45rem, 5.6vw, 4.4rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+    }
+
+    .hero-role {
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      font-weight: 500;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
+    }
+
+    .hero-domains {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem 0.85rem;
+      padding-top: 0.25rem;
+      font-family: var(--font-mono-label);
+      font-size: 0.925rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .domain-sep {
+      color: var(--accent-secondary);
+      opacity: 0.8;
+      user-select: none;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.85rem 1.5rem;
+      background-color: var(--accent-primary);
+      color: #07101D;
+      font-family: var(--font-mono-label);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      transition: transform 0.25s var(--transition-smooth), background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #5CE0EE;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(57, 213, 230, 0.22);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.45rem;
+      background-color: var(--bg-secondary);
+      color: var(--text-main);
+      border: 1px solid var(--border-strong);
+      font-family: var(--font-mono-label);
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s var(--transition-smooth);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-primary);
+      background-color: var(--bg-elevated);
+      transform: translateY(-2px);
+    }
+
+    /* Subtle Architectural Schematic Diagram on Right of Hero */
+    .hero-schematic {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      background: linear-gradient(160deg, rgba(17, 28, 46, 0.72), rgba(11, 18, 32, 0.88));
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+      position: relative;
+    }
+
+    .schematic-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.75rem;
+      font-family: var(--font-mono-label);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .schematic-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .schematic-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 0.75rem;
+      font-family: var(--font-mono-label);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       06. SECTION 02 — ABOUT ME
+       ========================================================================== */
+    .editorial-lead {
+      font-size: clamp(1.125rem, 1.7vw, 1.325rem);
+      line-height: 1.82;
+      color: var(--text-main);
+      font-weight: 400;
+      max-width: 68ch;
+      padding-left: clamp(1.1rem, 2.2vw, 1.75rem);
+      border-left: 2px solid var(--accent-primary);
+    }
+
+    /* ==========================================================================
+       07. SECTION 03 — EDUCATION
+       ========================================================================== */
+    .academic-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      position: relative;
+      transition: border-color 0.3s ease;
+    }
+
+    .academic-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .academic-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      padding-bottom: 1.35rem;
+      margin-bottom: 1.35rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .academic-degree {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 1.8vw, 1.42rem);
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .academic-period {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.38rem 0.85rem;
+      border-radius: var(--radius-sm);
+      background-color: var(--accent-primary-dim);
+      border: 1px solid rgba(57, 213, 230, 0.24);
+      font-family: var(--font-mono-label);
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      white-space: nowrap;
+    }
+
+    .academic-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem 2rem;
+    }
+
+    .academic-field-label {
+      display: block;
+      font-family: var(--font-mono-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .academic-field-value {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       08. SECTION 04 — SKILLS (NO RATINGS OR PERCENTAGES)
+       ========================================================================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-item {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.35rem 1.4rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: border-color 0.25s ease, transform 0.25s var(--transition-smooth), background-color 0.25s ease;
+    }
+
+    .skill-item:hover {
+      border-color: rgba(57, 213, 230, 0.38);
+      background-color: var(--bg-elevated);
+      transform: translateY(-2px);
+    }
+
+    .skill-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-primary);
+    }
+
+    .skill-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .skill-code {
+      font-family: var(--font-mono-label);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    .skill-name {
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       09. SECTION 05 — LANGUAGES
+       ========================================================================== */
+    .languages-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .language-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem 1.65rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: border-color 0.25s ease;
+    }
+
+    .language-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .language-name {
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .language-level {
+      font-family: var(--font-mono-label);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      color: var(--accent-primary);
+      white-space: nowrap;
+    }
+
+    .language-card:nth-child(2) .language-level {
+      color: var(--accent-secondary);
+      border-color: rgba(139, 124, 255, 0.28);
+      background-color: var(--accent-secondary-dim);
+    }
+
+    /* ==========================================================================
+       10. SECTION 06 — COURSES & LEARNING (EXACT 6 TITLES)
+       ========================================================================== */
+    .courses-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .course-row {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1.25rem 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background-color 0.25s ease, padding-left 0.25s var(--transition-smooth);
+    }
+
+    .course-row:hover {
+      background-color: rgba(17, 28, 46, 0.72);
+      padding-left: 1.1rem;
+    }
+
+    .course-num {
+      font-family: var(--font-mono-label);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--accent-primary);
+    }
+
+    .course-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       11. SECTION 07 — MY VISION (DISTINCTIVE EDITORIAL COMPOSITION)
+       ========================================================================== */
+    .vision-panel {
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(17, 28, 46, 0.65) 100%);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: clamp(2rem, 4vw, 3rem);
+      overflow: hidden;
+    }
+
+    .vision-panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+    }
+
+    .vision-quote-mark {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--accent-primary);
+      opacity: 0.45;
+      margin-bottom: 0.5rem;
+      user-select: none;
+    }
+
+    .vision-statement {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+      font-weight: 500;
+      line-height: 1.6;
+      letter-spacing: -0.015em;
+      color: var(--text-main);
+      max-width: 56ch;
+    }
+
+    /* ==========================================================================
+       12. SECTION 08 — CONTACT
+       ========================================================================== */
+    .contact-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: clamp(1.65rem, 3vw, 2.35rem);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .contact-label {
+      font-family: var(--font-mono-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .contact-email-link {
+      font-family: var(--font-display);
+      font-size: clamp(1.12rem, 2.1vw, 1.45rem);
+      font-weight: 600;
+      color: var(--text-main);
+      word-break: break-all;
+      transition: color 0.25s ease;
+    }
+
+    .contact-email-link:hover {
+      color: var(--accent-primary);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .copy-feedback {
+      font-family: var(--font-mono-label);
+      font-size: 0.8rem;
+      color: var(--accent-primary);
+      min-height: 1.2em;
+    }
+
+    /* ==========================================================================
+       13. FOOTER
+       ========================================================================== */
+    .site-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding-block: 2.25rem;
+      margin-top: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--text-main);
+    }
+
+    .back-to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--font-mono-label);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .back-to-top:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    /* ==========================================================================
+       14. REVEAL MOTION & ACCESSIBILITY (PREFERS-REDUCED-MOTION)
+       ========================================================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s var(--transition-smooth), transform 0.65s var(--transition-smooth);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ==========================================================================
+       15. RESPONSIVE BREAKPOINTS
+       ========================================================================== */
+    @media (max-width: 980px) {
+      .desktop-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .hero-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-schematic {
+        max-width: 440px;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+
+      .section-meta {
+        position: static;
+      }
+
+      .academic-details,
+      .languages-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .mobile-nav-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        width: 100%;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .course-row {
+        grid-template-columns: 38px minmax(0, 1fr);
+        padding-inline: 0.35rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ========================================================================
+       HEADER & PRIMARY NAVIGATION
+       ======================================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="brand-mark" aria-label="NOHA ALI HADI ALI — Home">
+        <span class="brand-monogram" aria-hidden="true">NA</span>
+        <span>NOHA ALI HADI ALI</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary Navigation">
+        <a href="#home" class="nav-link active" data-nav="home">Home</a>
+        <a href="#about" class="nav-link" data-nav="about">About</a>
+        <a href="#education" class="nav-link" data-nav="education">Education</a>
+        <a href="#skills" class="nav-link" data-nav="skills">Skills</a>
+        <a href="#languages" class="nav-link" data-nav="languages">Languages</a>
+        <a href="#courses" class="nav-link" data-nav="courses">Courses</a>
+        <a href="#vision" class="nav-link" data-nav="vision">Vision</a>
+        <a href="#contact" class="nav-link" data-nav="contact">Contact</a>
+      </nav>
+
+      <button
+        type="button"
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+        aria-label="Toggle navigation menu"
+      >
+        <svg id="menu-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="7" x2="21" y2="7"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="17" x2="21" y2="17"></line>
+        </svg>
+        <svg id="menu-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: none;">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+      <nav aria-label="Mobile Navigation">
+        <ul class="mobile-nav-list">
+          <li><a href="#home" class="mobile-nav-link active" data-nav="home"><span>Home</span><span aria-hidden="true">01</span></a></li>
+          <li><a href="#about" class="mobile-nav-link" data-nav="about"><span>About</span><span aria-hidden="true">02</span></a></li>
+          <li><a href="#education" class="mobile-nav-link" data-nav="education"><span>Education</span><span aria-hidden="true">03</span></a></li>
+          <li><a href="#skills" class="mobile-nav-link" data-nav="skills"><span>Skills</span><span aria-hidden="true">04</span></a></li>
+          <li><a href="#languages" class="mobile-nav-link" data-nav="languages"><span>Languages</span><span aria-hidden="true">05</span></a></li>
+          <li><a href="#courses" class="mobile-nav-link" data-nav="courses"><span>Courses</span><span aria-hidden="true">06</span></a></li>
+          <li><a href="#vision" class="mobile-nav-link" data-nav="vision"><span>Vision</span><span aria-hidden="true">07</span></a></li>
+          <li><a href="#contact" class="mobile-nav-link" data-nav="contact"><span>Contact</span><span aria-hidden="true">08</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- ======================================================================
+         SECTION 01 — HERO / INTRODUCTION
+         ====================================================================== -->
+    <section id="home" class="hero-section" aria-labelledby="hero-heading">
+      <div class="hero-canvas-wrap" aria-hidden="true">
+        <canvas id="hero-network-canvas"></canvas>
+      </div>
+
+      <div class="container">
+        <div class="hero-layout">
+          <div class="hero-content">
+            <div class="hero-eyebrow">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              <span>Academic &amp; Technology Portfolio</span>
+            </div>
+
+            <h1 id="hero-heading" class="hero-name">NOHA ALI HADI ALI</h1>
+
+            <p class="hero-role">Computer &amp; Information Technology Student</p>
+
+            <div class="hero-domains" aria-label="Fields of Interest">
+              <span>Artificial Intelligence</span>
+              <span class="domain-sep" aria-hidden="true">|</span>
+              <span>Technology</span>
+              <span class="domain-sep" aria-hidden="true">|</span>
+              <span>Research</span>
+              <span class="domain-sep" aria-hidden="true">|</span>
+              <span>Innovation</span>
+            </div>
+
+            <div class="hero-actions">
+              <a href="#about" class="btn-primary">
+                <span>Explore Portfolio</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+              </a>
+              <a href="#contact" class="btn-secondary">
+                <span>Contact</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Subtle Architectural & Computational Topology Visual -->
+          <aside class="hero-schematic" aria-hidden="true">
+            <div class="schematic-header">
+              <span>DOMAIN TOPOLOGY</span>
+              <span style="color: var(--accent-primary);">CIT // 01–08</span>
+            </div>
+            <svg class="schematic-svg" viewBox="0 0 300 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Architectural Coordinate Axes -->
+              <line x1="24" y1="110" x2="276" y2="110" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3" />
+              <line x1="150" y1="20" x2="150" y2="200" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3" />
+
+              <!-- Concentric Precision Rings -->
+              <circle cx="150" cy="110" r="82" stroke="rgba(255,255,255,0.10)" />
+              <circle cx="150" cy="110" r="52" stroke="rgba(57,213,230,0.22)" />
+              <circle cx="150" cy="110" r="22" stroke="rgba(139,124,255,0.32)" />
+
+              <!-- Connecting Vectors -->
+              <line x1="150" y1="28" x2="232" y2="110" stroke="rgba(57,213,230,0.28)" />
+              <line x1="232" y1="110" x2="150" y2="192" stroke="rgba(139,124,255,0.28)" />
+              <line x1="150" y1="192" x2="68" y2="110" stroke="rgba(57,213,230,0.28)" />
+              <line x1="68" y1="110" x2="150" y2="28" stroke="rgba(139,124,255,0.28)" />
+
+              <!-- Nodes -->
+              <circle cx="150" cy="110" r="4.5" fill="#39D5E6" />
+              <circle cx="150" cy="28" r="3.5" fill="#F5F7FA" />
+              <circle cx="232" cy="110" r="3.5" fill="#39D5E6" />
+              <circle cx="150" cy="192" r="3.5" fill="#8B7CFF" />
+              <circle cx="68" cy="110" r="3.5" fill="#F5F7FA" />
+            </svg>
+            <div class="schematic-footer">
+              <span>AI · Research · Systems</span>
+              <span style="color: var(--accent-secondary);">IUM</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 02 — ABOUT ME
+         ====================================================================== -->
+    <section id="about" class="section" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="section-grid reveal">
+          <div class="section-meta">
+            <span class="section-index">02</span>
+            <h2 id="about-heading" class="section-title">About Me</h2>
+          </div>
+
+          <div class="section-content">
+            <p class="editorial-lead">I am a Computer and Information Technology student interested in artificial intelligence, software development, cybersecurity, and emerging technologies. I enjoy exploring technical concepts, conducting academic research, and developing digital experiences. My interests focus on combining technical knowledge with creative problem-solving to address real-world challenges.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 03 — EDUCATION
+         ====================================================================== -->
+    <section id="education" class="section" aria-labelledby="education-heading">
+      <div class="container">
+        <div class="section-grid reveal">
+          <div class="section-meta">
+            <span class="section-index">03</span>
+            <h2 id="education-heading" class="section-title">Education</h2>
+          </div>
+
+          <div class="section-content">
+            <article class="academic-card">
+              <div class="academic-top">
+                <h3 class="academic-degree">Bachelor's Degree in Computer and Information Technology</h3>
+                <span class="academic-period">2026 – Present</span>
+              </div>
+
+              <div class="academic-details">
+                <div>
+                  <span class="academic-field-label">Institution</span>
+                  <p class="academic-field-value">Islamic University of Minnesota (IUM)</p>
+                </div>
+
+                <div>
+                  <span class="academic-field-label">College</span>
+                  <p class="academic-field-value">College of Computers and Information Technology</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 04 — TECHNICAL & PROFESSIONAL SKILLS
+         ====================================================================== -->
+    <section id="skills" class="section" aria-labelledby="skills-heading">
+      <div class="container">
+        <div class="section-grid reveal">
+          <div class="section-meta">
+            <span class="section-index">04</span>
+            <h2 id="skills-heading" class="section-title">Skills</h2>
+          </div>
+
+          <div class="section-content">
+            <div class="skills-grid">
+              <!-- Skill 1 -->
+              <div class="skill-item">
+                <div class="skill-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                    <rect x="9" y="9" width="6" height="6"></rect>
+                    <line x1="9" y1="1" x2="9" y2="4"></line>
+                    <line x1="15" y1="1" x2="15" y2="4"></line>
+                    <line x1="9" y1="20" x2="9" y2="23"></line>
+                    <line x1="15" y1="20" x2="15" y2="23"></line>
+                    <line x1="20" y1="9" x2="23" y2="9"></line>
+                    <line x1="20" y1="14" x2="23" y2="14"></line>
+                    <line x1="1" y1="9" x2="4" y2="9"></line>
+                    <line x1="1" y1="14" x2="4" y2="14"></line>
+                  </svg>
+                </div>
+                <div class="skill-body">
+                  <span class="skill-code">01</span>
+                  <h3 class="skill-name">Artificial Intelligence Fundamentals</h3>
+                </div>
+              </div>
+
+              <!-- Skill 2 -->
+              <div class="skill-item">
+                <div class="skill-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                </div>
+                <div class="skill-body">
+                  <span class="skill-code">02</span>
+                  <h3 class="skill-name">Web Development</h3>
+                </div>
+              </div>
+
+              <!-- Skill 3 -->
+              <div class="skill-item">
+                <div class="skill-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                </div>
+                <div class="skill-body">
+                  <span class="skill-code">03</span>
+                  <h3 class="skill-name">HTML, CSS &amp; JavaScript</h3>
+                </div>
+              </div>
+
+              <!-- Skill 4 -->
+              <div class="skill-item">
+                <div class="skill-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                </div>
+                <div class="skill-body">
+                  <span class="skill-code">04</span>
+                  <h3 class="skill-name">Cybersecurity Fundamentals</h3>
+                </div>
+              </div>
+
+              <!-- Skill 5 -->
+              <div class="skill-item">
+                <div class="skill-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <div class="skill-body">
+                  <span class="skill-code">05</span>
+                  <h3 class="skill-name">Research and Technical Documentation</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 05 — LANGUAGES
+         ====================================================================== -->
+    <section id="languages" class="section" aria-labelledby="languages-heading">
+      <div class="container">
+        <div class="section-grid reveal">
+          <div class="section-meta">
+            <span class="section-index">05</span>
+            <h2 id="languages-heading" class="section-title">Languages</h2>
+          </div>
+
+          <div class="section-content">
+            <div class="languages-grid">
+              <div class="language-card">
+                <h3 class="language-name">Arabic</h3>
+                <span class="language-level">Native</span>
+              </div>
+
+              <div class="language-card">
+                <h3 class="language-name">English</h3>
+                <span class="language-level">B2 – Upper-Intermediate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 06 — COURSES & LEARNING
+         ====================================================================== -->
+    <section id="courses" class="section" aria-labelledby="courses-heading">
+      <div class="container">
+        <div class="section-grid reveal">
+          <div class="section-meta">
+            <span class="section-index">06</span>
+            <h2 id="courses-heading" class="section-title">Courses &amp; Learning</h2>
+          </div>
+
+          <div class="section-content">
+            <ol class="courses-list">
+              <li class="course-row">
+                <span class="course-num" aria-hidden="true">01</span>
+                <span class="course-title">Employing AI in Scientific Research &amp; Academic Publishing</span>
+              </li>
+              <li class="course-row">
+                <span class="course-num" aria-hidden="true">02</span>
+                <span class="course-title">Personal Data Protection in Digital Society</span>
+              </li>
+              <li class="course-row">
+                <span class="course-num" aria-hidden="true">03</span>
+                <span class="course-title">Modern Trends in Nursing Education, Practice &amp; Research</span>
+              </li>
+              <li class="course-row">
+                <span class="course-num" aria-hidden="true">04</span>
+                <span class="course-title">AAC Modeling in Augmentative and Alternative Communication</span>
+              </li>
+              <li class="course-row">
+                <span class="course-num" aria-hidden="true">05</span>
+                <span class="course-title">Artificial Intelligence</span>
+              </li>
+              <li class="course-row">
+                <span class="course-num" aria-hidden="true">06</span>
+                <span class="course-title">Cybersecurity – King Saud University</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 07 — MY VISION
+         ====================================================================== -->
+    <section id="vision" class="section" aria-labelledby="vision-heading">
+      <div class="container">
+        <div class="section-grid reveal">
+          <div class="section-meta">
+            <span class="section-index">07</span>
+            <h2 id="vision-heading" class="section-title">My Vision</h2>
+          </div>
+
+          <div class="section-content">
+            <div class="vision-panel">
+              <div class="vision-quote-mark" aria-hidden="true">&ldquo;</div>
+              <p class="vision-statement">To contribute to meaningful technological development through research, continuous learning, and the creation of practical digital solutions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 08 — CONTACT
+         ====================================================================== -->
+    <section id="contact" class="section" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-grid reveal">
+          <div class="section-meta">
+            <span class="section-index">08</span>
+            <h2 id="contact-heading" class="section-title">Contact</h2>
+          </div>
+
+          <div class="section-content">
+            <div class="contact-card">
+              <div class="contact-info">
+                <span class="contact-label">Email</span>
+                <a href="mailto:Researchernohaali7@gmail.com" class="contact-email-link" id="email-address">Researchernohaali7@gmail.com</a>
+                <span class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></span>
+              </div>
+
+              <div class="contact-actions">
+                <a href="mailto:Researchernohaali7@gmail.com" class="btn-primary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  <span>Send Email</span>
+                </a>
+
+                <button type="button" class="btn-secondary" id="copy-email-btn">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span>Copy Email</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <span class="footer-name">NOHA ALI HADI ALI</span>
+        <span> — Computer &amp; Information Technology Student</span>
+      </div>
+
+      <a href="#home" class="back-to-top" aria-label="Back to top of page">
+        <span>Back to Top</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="12" y1="19" x2="12" y2="5"></line>
+          <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       VANILLA JAVASCRIPT INTERACTIVITY & AMBIENT ARCHITECTURAL CANVAS
+       ======================================================================== -->
+  <script>
+    (function () {
+      "use strict";
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* ----------------------------------------------------------------------
+         1. MOBILE NAVIGATION DRAWER & ACCESSIBILITY
+         ---------------------------------------------------------------------- */
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileDrawer = document.getElementById("mobile-drawer");
+      const iconOpen = document.getElementById("menu-icon-open");
+      const iconClose = document.getElementById("menu-icon-close");
+      const mobileLinks = document.querySelectorAll(".mobile-nav-link");
+
+      function setMenuState(isOpen) {
+        if (!menuToggle || !mobileDrawer) return;
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        mobileDrawer.setAttribute("aria-hidden", String(!isOpen));
+        mobileDrawer.classList.toggle("open", isOpen);
+        if (iconOpen && iconClose) {
+          iconOpen.style.display = isOpen ? "none" : "block";
+          iconClose.style.display = isOpen ? "block" : "none";
+        }
+      }
+
+      if (menuToggle && mobileDrawer) {
+        menuToggle.addEventListener("click", function () {
+          const isCurrentlyOpen = menuToggle.getAttribute("aria-expanded") === "true";
+          setMenuState(!isCurrentlyOpen);
+        });
+
+        mobileLinks.forEach(function (link) {
+          link.addEventListener("click", function () {
+            setMenuState(false);
+          });
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
+            setMenuState(false);
+            menuToggle.focus();
+          }
+        });
+
+        document.addEventListener("click", function (event) {
+          const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+          if (isOpen && !mobileDrawer.contains(event.target) && !menuToggle.contains(event.target)) {
+            setMenuState(false);
+          }
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         2. ACTIVE NAVIGATION HIGHLIGHTING VIA INTERSECTION OBSERVER
+         ---------------------------------------------------------------------- */
+      const sections = document.querySelectorAll("main section[id]");
+      const allNavLinks = document.querySelectorAll("[data-nav]");
+
+      function setActiveNav(sectionId) {
+        allNavLinks.forEach(function (link) {
+          const isMatch = link.getAttribute("data-nav") === sectionId;
+          link.classList.toggle("active", isMatch);
+          if (isMatch) {
+            link.setAttribute("aria-current", "page");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+      }
+
+      if ("IntersectionObserver" in window && sections.length > 0) {
+        const navObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                setActiveNav(entry.target.id);
+              }
+            });
+          },
+          {
+            rootMargin: "-25% 0px -60% 0px",
+            threshold: 0.05
+          }
+        );
+
+        sections.forEach(function (section) {
+          navObserver.observe(section);
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         3. SUBTLE SECTION REVEAL ANIMATIONS
+         ---------------------------------------------------------------------- */
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if (!prefersReducedMotion && "IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver(
+          function (entries, observer) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.12,
+            rootMargin: "0px 0px -40px 0px"
+          }
+        );
+
+        revealElements.forEach(function (el) {
+          revealObserver.observe(el);
+        });
+      } else {
+        revealElements.forEach(function (el) {
+          el.classList.add("is-visible");
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         4. COPY EMAIL ACTION WITH ACCESSIBLE FEEDBACK
+         ---------------------------------------------------------------------- */
+      const copyBtn = document.getElementById("copy-email-btn");
+      const feedbackEl = document.getElementById("copy-feedback");
+      const emailText = "Researchernohaali7@gmail.com";
+      let feedbackTimeout = null;
+
+      function showCopyFeedback(message) {
+        if (!feedbackEl) return;
+        feedbackEl.textContent = message;
+        if (feedbackTimeout) clearTimeout(feedbackTimeout);
+        feedbackTimeout = setTimeout(function () {
+          feedbackEl.textContent = "";
+        }, 3200);
+      }
+
+      if (copyBtn) {
+        copyBtn.addEventListener("click", function () {
+          const tempInput = document.createElement("textarea");
+          tempInput.value = emailText;
+          tempInput.setAttribute("readonly", "");
+          tempInput.style.position = "fixed";
+          tempInput.style.opacity = "0";
+          document.body.appendChild(tempInput);
+          tempInput.select();
+
+          try {
+            const success = document.execCommand("copy");
+            if (success) {
+              showCopyFeedback("Email address copied to clipboard.");
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(emailText).then(function () {
+                showCopyFeedback("Email address copied to clipboard.");
+              });
+            }
+          } catch (err) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(emailText).then(function () {
+                showCopyFeedback("Email address copied to clipboard.");
+              });
+            }
+          } finally {
+            document.body.removeChild(tempInput);
+          }
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         5. SUBTLE HERO ARCHITECTURAL NODE NETWORK CANVAS
+         ---------------------------------------------------------------------- */
+      const canvas = document.getElementById("hero-network-canvas");
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        let width = 0;
+        let height = 0;
+        let nodes = [];
+        let animationFrameId = null;
+
+        function initCanvas() {
+          const rect = canvas.parentElement.getBoundingClientRect();
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = rect.width;
+          height = rect.height;
+          canvas.width = width * dpr;
+          canvas.height = height * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+          const nodeCount = Math.min(28, Math.max(12, Math.floor((width * height) / 42000)));
+          nodes = [];
+          for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
+              x: Math.random() * width,
+              y: Math.random() * height,
+              vx: (Math.random() - 0.5) * 0.24,
+              vy: (Math.random() - 0.5) * 0.24,
+              radius: Math.random() * 1.4 + 1.1,
+              accent: i % 4 === 0
+            });
+          }
+        }
+
+        function drawNetwork() {
+          ctx.clearRect(0, 0, width, height);
+          const maxDist = 175;
+
+          for (let i = 0; i < nodes.length; i++) {
+            const a = nodes[i];
+            if (!prefersReducedMotion) {
+              a.x += a.vx;
+              a.y += a.vy;
+              if (a.x < 0 || a.x > width) a.vx *= -1;
+              if (a.y < 0 || a.y > height) a.vy *= -1;
+            }
+
+            for (let j = i + 1; j < nodes.length; j++) {
+              const b = nodes[j];
+              const dx = a.x - b.x;
+              const dy = a.y - b.y;
+              const dist = Math.hypot(dx, dy);
+
+              if (dist < maxDist) {
+                const alpha = (1 - dist / maxDist) * 0.14;
+                ctx.strokeStyle = a.accent || b.accent
+                  ? "rgba(57, 213, 230, " + alpha.toFixed(3) + ")"
+                  : "rgba(168, 179, 197, " + (alpha * 0.75).toFixed(3) + ")";
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.stroke();
+              }
+            }
+
+            ctx.fillStyle = a.accent ? "rgba(57, 213, 230, 0.45)" : "rgba(139, 124, 255, 0.35)";
+            ctx.beginPath();
+            ctx.arc(a.x, a.y, a.radius, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          if (!prefersReducedMotion) {
+            animationFrameId = window.requestAnimationFrame(drawNetwork);
+          }
+        }
+
+        initCanvas();
+        drawNetwork();
+
+        let resizeTimer = null;
+        window.addEventListener("resize", function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function () {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            initCanvas();
+            drawNetwork();
+          }, 150);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
